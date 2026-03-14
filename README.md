@@ -207,7 +207,7 @@
     <!-- Nav -->
     <nav id="navbar">
         <div class="nav-inner">
-            <a href="#hero" class="nav-logo">&lt;charan /&gt;</a>
+            <a href="#hero" class="nav-logo">&lt;charan/&gt;</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -360,7 +360,7 @@
                         <div class="terminal-dot r"></div>
                         <div class="terminal-dot y"></div>
                         <div class="terminal-dot g"></div>
-                        <div class="terminal-title">charan@web3 ~ %</div>
+                        <div class="terminal-title">charan@web3 ~ % </div>
                     </div>
                     <div class="terminal-body" id="termBody">
                         <div class="term-line"><span class="term-out">Welcome to Charan's interactive terminal. Type <span class="term-highlight">help</span> to see available commands.</span></div>
