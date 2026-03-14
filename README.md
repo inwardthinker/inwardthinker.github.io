@@ -1,1 +1,707 @@
-Landing page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charan Kattumenu — CTO, Web3 Builder, Prediction Markets</title>
+    <meta name="description" content="Cofounder & CTO building next-gen prediction markets and crypto sportsbooks. IIT Bombay CS '15. 12 years across Data Engineering, Blockchain & Web3.">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .icon-svg { width: 1em; height: 1em; fill: currentColor; vertical-align: -0.125em; display: inline-block; }
+        :root {
+            --bg: #080808;
+            --bg2: #0e0e0e;
+            --card: #161616;
+            --cyan: #ff6a00;
+            --purple: #ff8c33;
+            --coral: #ffb347;
+            --grad1: linear-gradient(135deg, #ff6a00, #ff9a40);
+            --grad2: linear-gradient(135deg, #ff8c33, #ffb347);
+            --text: #f0ece8;
+            --muted: #998877;
+            --dim: #665544;
+            --border: #2a2218;
+            --glow: rgba(255,106,0,0.2);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; line-height:1.6; }
+
+        /* BG */
+        .bg-grid { position:fixed; inset:0; background-image:linear-gradient(rgba(255,106,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,106,0,.04) 1px,transparent 1px); background-size:60px 60px; z-index:0; pointer-events:none; }
+        .orb { position:fixed; border-radius:50%; filter:blur(80px); opacity:.35; pointer-events:none; z-index:0; animation:float 20s ease-in-out infinite; }
+        .orb-1 { width:400px;height:400px;background:var(--purple);top:-100px;right:-100px; }
+        .orb-2 { width:300px;height:300px;background:var(--cyan);bottom:-50px;left:-50px;animation-delay:-7s; }
+        @keyframes float { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-30px,50px) scale(.9)} }
+
+        /* NAV */
+        nav { position:fixed; top:0; left:0; right:0; z-index:1000; padding:1rem 2rem; background:rgba(10,10,15,.8); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); transition:all .3s; }
+        nav.scrolled { padding:.6rem 2rem; background:rgba(10,10,15,.95); }
+        .nav-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+        .nav-logo { font-family:'JetBrains Mono',monospace; font-weight:600; font-size:1.3rem; background:var(--grad1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }
+        .nav-links { display:flex; gap:2rem; list-style:none; }
+        .nav-links a { color:var(--muted); text-decoration:none; font-size:.9rem; font-weight:500; transition:color .3s; }
+        .nav-links a:hover { color:var(--cyan); }
+        .nav-cta { padding:.5rem 1.2rem; background:var(--grad1); border:none; border-radius:8px; color:#000; font-weight:600; font-size:.85rem; cursor:pointer; text-decoration:none; transition:transform .2s; }
+        .nav-cta:hover { transform:translateY(-1px); box-shadow:0 4px 20px var(--glow); }
+        .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; }
+        .hamburger span { width:25px; height:2px; background:var(--text); }
+
+        /* HERO */
+        #hero { min-height:100vh; display:flex; align-items:center; padding:8rem 2rem 4rem; position:relative; z-index:1; }
+        .hero-inner { max-width:1200px; margin:0 auto; width:100%; display:grid; grid-template-columns:1.2fr .8fr; gap:4rem; align-items:center; }
+        .hero-badge { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem 1rem; background:rgba(255,106,0,.1); border:1px solid rgba(255,106,0,.25); border-radius:100px; font-size:.8rem; color:var(--cyan); margin-bottom:1.5rem; font-family:'JetBrains Mono',monospace; }
+        .pulse { width:8px;height:8px;background:var(--cyan);border-radius:50%;animation:pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+        .hero-title { font-size:3.8rem; font-weight:700; line-height:1.1; margin-bottom:1.5rem; letter-spacing:-1.5px; }
+        .gradient { background:var(--grad1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .hero-sub { font-size:1.15rem; color:var(--muted); margin-bottom:2rem; max-width:540px; line-height:1.7; }
+        .hero-stats { display:flex; gap:2.5rem; margin-bottom:2.5rem; }
+        .stat-num { font-family:'JetBrains Mono',monospace; font-size:2rem; font-weight:700; background:var(--grad1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .stat-label { font-size:.8rem; color:var(--dim); text-transform:uppercase; letter-spacing:1px; }
+        .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+        .btn-p { padding:.8rem 2rem; background:var(--grad1); border:none; border-radius:12px; color:#000; font-weight:600; font-size:1rem; cursor:pointer; text-decoration:none; transition:all .3s; display:inline-flex; align-items:center; gap:.5rem; }
+        .btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 30px var(--glow); }
+        .btn-s { padding:.8rem 2rem; background:transparent; border:1px solid var(--border); border-radius:12px; color:var(--text); font-weight:500; font-size:1rem; text-decoration:none; transition:all .3s; display:inline-flex; align-items:center; gap:.5rem; }
+        .btn-s:hover { border-color:var(--cyan); background:rgba(0,240,255,.05); }
+
+        /* HERO CARD */
+        .hero-visual { display:flex; justify-content:center; align-items:center; }
+        .hero-card { width:100%; max-width:380px; background:var(--card); border:1px solid var(--border); border-radius:20px; padding:2rem; position:relative; overflow:hidden; }
+        .hero-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:var(--grad1); }
+        .hc-header { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
+        .hc-avatar { width:60px;height:60px;border-radius:50%;background:var(--grad1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;color:#000; }
+        .hc-name { font-weight:600; font-size:1.1rem; }
+        .hc-handle { font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--cyan); }
+        .hc-tags { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.5rem; }
+        .tag { padding:.3rem .8rem; background:rgba(255,106,0,.1); border:1px solid rgba(255,106,0,.2); border-radius:100px; font-size:.75rem; color:#ffb347; font-family:'JetBrains Mono',monospace; }
+        .hc-links { display:flex; gap:.8rem; }
+        .hc-links a { width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(255,255,255,.05);color:var(--muted);text-decoration:none;transition:all .3s; }
+        .hc-links a:hover { background:var(--grad1); color:#000; transform:translateY(-2px); }
+
+        /* SECTIONS */
+        section { position:relative; z-index:1; padding:6rem 2rem; }
+        .sec { max-width:1200px; margin:0 auto; }
+        .sec-label { font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--cyan); text-transform:uppercase; letter-spacing:2px; margin-bottom:.5rem; }
+        .sec-title { font-size:2.5rem; font-weight:700; margin-bottom:1rem; letter-spacing:-1px; }
+        .sec-desc { color:var(--muted); max-width:600px; margin-bottom:3rem; font-size:1.05rem; }
+
+        /* ABOUT */
+        #about { background:var(--bg2); }
+        .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
+        .about-text p { color:var(--muted); margin-bottom:1rem; font-size:1.05rem; line-height:1.8; }
+        .highlights { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+        .hl { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; transition:all .3s; }
+        .hl:hover { border-color:var(--cyan); transform:translateY(-4px); box-shadow:0 8px 30px var(--glow); }
+        .hl-icon { font-size:1.5rem; margin-bottom:.8rem; }
+        .hl-title { font-weight:600; font-size:1rem; margin-bottom:.3rem; }
+        .hl-desc { font-size:.85rem; color:var(--dim); }
+
+        /* EXPERIENCE */
+        .timeline { position:relative; padding-left:3rem; }
+        .timeline::before { content:''; position:absolute; left:0;top:0;bottom:0; width:2px; background:linear-gradient(to bottom,var(--cyan),var(--purple),var(--coral)); }
+        .tl-item { position:relative; margin-bottom:2.5rem; padding-left:1rem; }
+        .tl-item::before { content:''; position:absolute; left:-3.55rem;top:.4rem; width:14px;height:14px; border-radius:50%; background:var(--cyan); border:3px solid var(--bg); box-shadow:0 0 15px var(--glow); }
+        .tl-item:nth-child(even)::before { background:var(--purple); }
+        .tl-date { font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--cyan); margin-bottom:.2rem; }
+        .tl-role { font-size:1.2rem; font-weight:600; }
+        .tl-co { font-size:.95rem; color:var(--muted); margin-bottom:.3rem; }
+        .tl-co .loc { font-size:.85rem; color:var(--dim); }
+        .tl-tech { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.4rem; }
+        .tt { padding:.2rem .6rem; background:rgba(255,106,0,.08); border:1px solid rgba(255,106,0,.15); border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--cyan); }
+
+        /* PROJECTS */
+        #projects { background:var(--bg2); }
+        .proj-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+        .proj { background:var(--card); border:1px solid var(--border); border-radius:20px; overflow:hidden; transition:all .4s; position:relative; }
+        .proj:hover { transform:translateY(-6px); border-color:var(--purple); box-shadow:0 12px 40px rgba(255,106,0,.15); }
+        .proj::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:var(--grad1); }
+        .proj:nth-child(2)::before { background:var(--grad2); }
+        .proj-img { width:100%; height:180px; display:flex; align-items:center; justify-content:center; background:var(--bg); }
+        .proj-body { padding:1.5rem; }
+        .proj-label { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--purple); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:.5rem; }
+        .proj-name { font-size:1.3rem; font-weight:600; margin-bottom:.4rem; }
+        .proj-desc { color:var(--muted); font-size:.9rem; margin-bottom:1rem; line-height:1.6; }
+        .proj-link { padding:.4rem 1rem; border-radius:8px; font-size:.8rem; font-weight:500; text-decoration:none; transition:all .3s; background:var(--grad1); color:#000; display:inline-block; }
+        .proj-link:hover { transform:translateY(-1px); }
+
+        /* INTERACTIVE TERMINAL */
+        #terminal-section { background: var(--bg2); }
+        .terminal-wrap { max-width:800px; margin:0 auto; }
+        .terminal { background:#0a0a0a; border:1px solid var(--border); border-radius:16px; overflow:hidden; font-family:'JetBrains Mono',monospace; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+        .terminal-bar { display:flex; align-items:center; gap:.5rem; padding:.8rem 1.2rem; background:rgba(255,255,255,.03); border-bottom:1px solid var(--border); }
+        .terminal-dot { width:12px;height:12px;border-radius:50%; }
+        .terminal-dot.r { background:#ff5f57; }
+        .terminal-dot.y { background:#febc2e; }
+        .terminal-dot.g { background:#28c840; }
+        .terminal-title { margin-left:.8rem; font-size:.75rem; color:var(--dim); }
+        .terminal-body { padding:1.5rem; height:400px; overflow-y:auto; font-size:.85rem; line-height:1.8; }
+        .terminal-body::-webkit-scrollbar { width:6px; }
+        .terminal-body::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+        .term-line { margin-bottom:.3rem; }
+        .term-prompt { color:var(--cyan); }
+        .term-cmd { color:#fff; }
+        .term-out { color:var(--muted); }
+        .term-highlight { color:#ff6a00; }
+        .term-accent { color:#ffb347; }
+        .term-success { color:#ff8c33; }
+        .term-input-line { display:flex; align-items:center; gap:0; }
+        #termInput { background:none; border:none; color:#fff; font-family:'JetBrains Mono',monospace; font-size:.85rem; outline:none; flex:1; caret-color:var(--cyan); }
+        .term-cursor { display:inline-block; width:8px; height:16px; background:var(--cyan); animation:blink 1s step-end infinite; margin-left:1px; }
+        @keyframes blink { 50%{opacity:0} }
+        .term-help-hint { text-align:center; padding:1rem; font-size:.75rem; color:var(--dim); font-family:'JetBrains Mono',monospace; border-top:1px solid var(--border); }
+
+        /* CONTACT */
+        #contact { background:var(--bg2); }
+        .contact-info p { color:var(--muted); margin-bottom:2rem; line-height:1.7; }
+        .c-links { display:flex; flex-direction:column; gap:1rem; }
+        .c-link { display:flex; align-items:center; gap:1rem; padding:1rem; background:var(--card); border:1px solid var(--border); border-radius:12px; text-decoration:none; color:var(--text); transition:all .3s; }
+        .c-link:hover { border-color:var(--cyan); transform:translateX(4px); }
+        .c-icon { width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:var(--grad1);color:#000;font-size:1rem; }
+        .c-label { font-size:.75rem; color:var(--dim); }
+
+        /* FOOTER */
+        footer { position:relative; z-index:1; padding:2rem; text-align:center; border-top:1px solid var(--border); }
+        .footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+        .footer-text { font-size:.85rem; color:var(--dim); }
+        .footer-socials { display:flex; gap:1rem; }
+        .footer-socials a { color:var(--dim); font-size:1.1rem; transition:color .3s; text-decoration:none; }
+        .footer-socials a:hover { color:var(--cyan); }
+
+        /* REVEAL */
+        .reveal { opacity:0; transform:translateY(30px); transition:all .8s cubic-bezier(.16,1,.3,1); }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+
+        /* RESPONSIVE */
+        @media(max-width:900px) {
+            .hero-inner { grid-template-columns:1fr; text-align:center; }
+            .hero-title { font-size:2.5rem; }
+            .hero-sub { margin:0 auto 2rem; }
+            .hero-stats { justify-content:center; }
+            .hero-btns { justify-content:center; }
+            .hero-visual { order:-1; }
+            .about-grid,.contact-grid,.proj-grid { grid-template-columns:1fr; }
+            .nav-links { display:none; }
+            .hamburger { display:flex; }
+            .nav-links.open { display:flex; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:rgba(10,10,15,.98); padding:2rem; border-bottom:1px solid var(--border); }
+        }
+        @media(max-width:600px) {
+            .hero-title { font-size:2rem; }
+            .sec-title { font-size:1.8rem; }
+            .highlights { grid-template-columns:1fr; }
+            .hero-stats { flex-direction:column; gap:1rem; align-items:center; }
+            .footer-inner { flex-direction:column; gap:1rem; }
+            .terminal-body { height:300px; }
+        }
+
+        /* TYPEWRITER */
+        .typewriter { display:inline; }
+        .tw-cursor { display:inline-block; width:3px; height:1.1em; background:var(--cyan); margin-left:2px; vertical-align:text-bottom; animation:blink 1s step-end infinite; }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Nav -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">&lt;charan /&gt;</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#terminal-section">Terminal</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Let's Talk</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="hero">
+        <div class="hero-inner">
+            <div>
+                <div class="hero-badge"><span class="pulse"></span> Building the future of prediction markets</div>
+                <h1 class="hero-title">
+                    I'm <span class="gradient">Charan</span>,<br>
+                    <span class="typewriter" id="typewriter"></span><span class="tw-cursor"></span>
+                </h1>
+                <p class="hero-sub">CTO & Cofounder who ships — from big data to blockchain to running a startup. 25+ countries. Tomorrowland veteran. Watched Messi lift the World Cup live from the stands.</p>
+                <div class="hero-stats">
+                    <div><div class="stat-num">12</div><div class="stat-label">Years Building</div></div>
+                    <div><div class="stat-num">25+</div><div class="stat-label">Countries</div></div>
+                    <div><div class="stat-num">2</div><div class="stat-label">Products Shipped</div></div>
+                </div>
+                <div class="hero-btns">
+                    <a href="#projects" class="btn-p">View My Work <svg class="icon-svg" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h306.7L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"/></svg></a>
+                    <a href="#contact" class="btn-s"><svg class="icon-svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" fill="currentColor"/></svg> Get in Touch</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="hc-header">
+                        <div class="hc-avatar">CK</div>
+                        <div><div class="hc-name">Charan Kattumenu</div><div class="hc-handle">@0xCryptoNomads</div></div>
+                    </div>
+                    <div class="hc-tags">
+                        <span class="tag">Web3</span><span class="tag">CTO</span><span class="tag">Data Eng</span><span class="tag">DeFi</span><span class="tag">Predictions</span><span class="tag">IIT Bombay</span>
+                    </div>
+                    <div class="hc-links">
+                        <a href="https://x.com/0xCryptoNomads" target="_blank" title="X/Twitter"><svg class="icon-svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" fill="currentColor"/></svg></a>
+                        <a href="https://www.linkedin.com/in/charankattumenu/" target="_blank" title="LinkedIn"><svg class="icon-svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.83-48.3 93.97 0 111.28 61.9 111.28 142.3V448z" fill="currentColor"/></svg></a>
+                        <a href="https://github.com/inwardthinker" target="_blank" title="GitHub"><svg class="icon-svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z" fill="currentColor"/></svg></a>
+                        <a href="https://dgpredict.com" target="_blank" title="DGPredict"><svg class="icon-svg" viewBox="0 0 512 512"><path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z" fill="currentColor"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="sec reveal">
+            <div class="sec-label">// about me</div>
+            <div class="sec-title">The Builder's Journey</div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>IIT Bombay CS '15. Started in big data across finance, healthcare, and supply chain. Moved to Copenhagen in 2018, spent three years building enterprise ETL at Tradeshift.</p>
+                    <p>Went all-in on Web3 in 2021 — not just as an engineer, but as a user. Traded DeFi, collected NFTs, bet on prediction markets with my own money. That first-hand consumer experience became my edge.</p>
+                    <p>Now I'm CTO & Cofounder at Barter, where I've shipped a crypto sportsbook and prediction markets platform from zero. I operate across engineering, product, and strategy — and still ship features end-to-end independently.</p>
+                </div>
+                <div class="highlights">
+                    <div class="hl"><div class="hl-icon">🎓</div><div class="hl-title">IIT Bombay</div><div class="hl-desc">B.Tech CS + Design Minor</div></div>
+                    <div class="hl"><div class="hl-icon">🌍</div><div class="hl-title">25+ Countries</div><div class="hl-desc">Russia '18 & Qatar '22 World Cups. Saw Messi lift it.</div></div>
+                    <div class="hl"><div class="hl-icon">🎧</div><div class="hl-title">Audiophile & DJ</div><div class="hl-desc">Tomorrowland. Traktor + Ableton Push. 12-speaker studio.</div></div>
+                    <div class="hl"><div class="hl-icon">🎬</div><div class="hl-title">Filmmaker</div><div class="hl-desc">Short films at IIT. Camera nerd. Editing with AI tools.</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+        <div class="sec reveal">
+            <div class="sec-label">// experience</div>
+            <div class="sec-title">Where I've Built</div>
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-date">2023 — Present</div>
+                    <div class="tl-role">Cofounder & CTO</div>
+                    <div class="tl-co">Barter <span class="loc">· Bengaluru</span></div>
+                    <div class="tl-tech"><span class="tt">Solidity</span><span class="tt">TypeScript</span><span class="tt">React</span><span class="tt">Node.js</span><span class="tt">Product</span></div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-date">2022 — 2023</div>
+                    <div class="tl-role">Lead Data Engineer</div>
+                    <div class="tl-co">Biconomy <span class="loc">· Dubai</span></div>
+                    <div class="tl-tech"><span class="tt">Golang</span><span class="tt">Kafka</span><span class="tt">Clickhouse</span><span class="tt">EVM</span><span class="tt">Kubernetes</span></div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-date">2018 — 2021</div>
+                    <div class="tl-role">Senior Data Engineer</div>
+                    <div class="tl-co">Tradeshift <span class="loc">· Copenhagen</span></div>
+                    <div class="tl-tech"><span class="tt">Spark</span><span class="tt">Scala</span><span class="tt">AWS</span><span class="tt">Kafka</span><span class="tt">Terraform</span></div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-date">2017 — 2018</div>
+                    <div class="tl-role">Data Scientist</div>
+                    <div class="tl-co">BlueFire AI <span class="loc">· Mumbai</span></div>
+                    <div class="tl-tech"><span class="tt">Python</span><span class="tt">PyTorch</span><span class="tt">NLP</span><span class="tt">Elasticsearch</span></div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-date">2015 — 2017</div>
+                    <div class="tl-role">Data Engineer</div>
+                    <div class="tl-co">Lumiata & Housing.com <span class="loc">· Mumbai</span></div>
+                    <div class="tl-tech"><span class="tt">Scala</span><span class="tt">Spark</span><span class="tt">ML</span><span class="tt">Cassandra</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <div class="sec reveal">
+            <div class="sec-label">// shipped</div>
+            <div class="sec-title">What I've Built</div>
+            <div class="proj-grid">
+                <div class="proj">
+                    <div class="proj-img" style="background:linear-gradient(135deg,#0e0e0e,#1a1008);"><span style="font-size:2.5rem;font-weight:700;background:linear-gradient(135deg,#ff6a00,#ffb347);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">DGPredict</span></div>
+                    <div class="proj-body">
+                        <div class="proj-label">Prediction Markets</div>
+                        <div class="proj-name">DGPredict</div>
+                        <div class="proj-desc">Trade on real-world outcomes — sports, politics, crypto, culture. Multi-strike bets, tweet markets, live event tracking.</div>
+                        <a href="https://dgpredict.com" target="_blank" class="proj-link">Visit App →</a>
+                    </div>
+                </div>
+                <div class="proj">
+                    <div class="proj-img" style="background:linear-gradient(135deg,#0e0e0e,#18100a);"><span style="font-size:2.5rem;font-weight:700;background:linear-gradient(135deg,#ff8c33,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">DGBet</span></div>
+                    <div class="proj-body">
+                        <div class="proj-label">Crypto Sportsbook</div>
+                        <div class="proj-name">DGBet Sportsbook</div>
+                        <div class="proj-desc">Crypto-native sportsbook. 670+ events across football, basketball, tennis, esports. Best odds, no bans, no limits.</div>
+                        <a href="https://sportsbook.dgbet.fun" target="_blank" class="proj-link">Visit App →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Terminal -->
+    <section id="terminal-section">
+        <div class="sec reveal">
+            <div class="sec-label">// explore</div>
+            <div class="sec-title">Try My Terminal</div>
+            <div class="sec-desc">An interactive way to learn about me. Type a command and hit Enter.</div>
+            <div class="terminal-wrap">
+                <div class="terminal">
+                    <div class="terminal-bar">
+                        <div class="terminal-dot r"></div>
+                        <div class="terminal-dot y"></div>
+                        <div class="terminal-dot g"></div>
+                        <div class="terminal-title">charan@web3 ~ %</div>
+                    </div>
+                    <div class="terminal-body" id="termBody">
+                        <div class="term-line"><span class="term-out">Welcome to Charan's interactive terminal. Type <span class="term-highlight">help</span> to see available commands.</span></div>
+                        <div class="term-line">&nbsp;</div>
+                    </div>
+                    <div class="term-help-hint">
+                        <div class="term-input-line">
+                            <span class="term-prompt">charan@web3 ~ % </span>
+                            <input type="text" id="termInput" autofocus autocomplete="off" spellcheck="false" placeholder="type a command...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="sec reveal">
+            <div class="sec-label">// get in touch</div>
+            <div class="sec-title">Let's Build Something</div>
+            <div class="contact-info" style="max-width:600px;">
+                <p>Web3 advisory, technical leadership, startup conversations, speaking, or just connecting with fellow builders.</p>
+                <div class="c-links">
+                    <a href="mailto:charan@barter.tech" class="c-link">
+                        <div class="c-icon"><svg class="icon-svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" fill="currentColor"/></svg></div>
+                        <div><div>charan@barter.tech</div><div class="c-label">Email</div></div>
+                    </a>
+                    <a href="https://x.com/0xCryptoNomads" target="_blank" class="c-link">
+                        <div class="c-icon"><svg class="icon-svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" fill="currentColor"/></svg></div>
+                        <div><div>@0xCryptoNomads</div><div class="c-label">Twitter / X — DMs Open</div></div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/charankattumenu/" target="_blank" class="c-link">
+                        <div class="c-icon"><svg class="icon-svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.83-48.3 93.97 0 111.28 61.9 111.28 142.3V448z" fill="currentColor"/></svg></div>
+                        <div><div>charankattumenu</div><div class="c-label">LinkedIn</div></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-text">© 2026 Charan Kattumenu. Built with conviction.</div>
+            <div class="footer-socials">
+                <a href="https://x.com/0xCryptoNomads" target="_blank"><svg class="icon-svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" fill="currentColor"/></svg></a>
+                <a href="https://www.linkedin.com/in/charankattumenu/" target="_blank"><svg class="icon-svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.83-48.3 93.97 0 111.28 61.9 111.28 142.3V448z" fill="currentColor"/></svg></a>
+                <a href="https://github.com/inwardthinker" target="_blank"><svg class="icon-svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z" fill="currentColor"/></svg></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Typewriter
+        const phrases = ['a Web3 Builder.','a CTO & Cofounder.','a Prediction Market Degen.','a Global Nomad.','building the future.'];
+        let pi=0,ci=0,del=false;
+        const tw=document.getElementById('typewriter');
+        function type(){const p=phrases[pi];if(del){tw.textContent=p.substring(0,ci-1);ci--}else{tw.textContent=p.substring(0,ci+1);ci++}let d=del?40:80;if(!del&&ci===p.length){d=2000;del=true}else if(del&&ci===0){del=false;pi=(pi+1)%phrases.length;d=300}setTimeout(type,d)}
+        type();
+
+        // Nav
+        const nav=document.getElementById('navbar');
+        window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+        const ham=document.getElementById('hamburger'),nl=document.getElementById('navLinks');
+        ham.addEventListener('click',()=>nl.classList.toggle('open'));
+        nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
+
+        // Reveal
+        const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});
+        document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}));
+
+        // ===== INTERACTIVE TERMINAL =====
+        const termBody=document.getElementById('termBody');
+        const termInput=document.getElementById('termInput');
+        const commands = {
+            help: () => [
+                '<span class="term-highlight">Available commands:</span>',
+                '',
+                '  <span class="term-cmd">whoami</span>       — Quick intro',
+                '  <span class="term-cmd">skills</span>       — Tech stack',
+                '  <span class="term-cmd">journey</span>      — Career path',
+                '  <span class="term-cmd">travel</span>       — Countries & adventures',
+                '  <span class="term-cmd">fifa</span>         — World Cup stories',
+                '  <span class="term-cmd">web3</span>         — My Web3 thesis',
+                '  <span class="term-cmd">unpopular</span>    — Hot takes',
+                '  <span class="term-cmd">stack</span>        — Current tech stack at Barter',
+                '  <span class="term-cmd">contact</span>      — How to reach me',
+                '  <span class="term-cmd">music</span>        — Audiophile & DJ life',
+                '  <span class="term-cmd">films</span>        — Filmmaking & cameras',
+                '  <span class="term-cmd">trading</span>      — Bots & strategies',
+                '  <span class="term-cmd">ai</span>           — What I\'m exploring now',
+                '  <span class="term-cmd">surprise</span>     — Try it ;)',
+                '  <span class="term-cmd">clear</span>        — Clear terminal',
+            ],
+            whoami: () => [
+                '<span class="term-accent">Charan Kattumenu</span>',
+                'CTO & Cofounder @ Barter | IIT Bombay CS \'15',
+                '12 years shipping software across data, blockchain & product.',
+                'Part engineer, part founder, part degen, full-time builder.',
+                'Explored 25+ countries. Watched Messi lift the World Cup.',
+            ],
+            skills: () => {
+                const skills = [
+                    {name:'Solidity',level:9},{name:'TypeScript',level:9},{name:'Golang',level:8},
+                    {name:'Python',level:8},{name:'Spark/Scala',level:8},{name:'React',level:7},
+                    {name:'Kafka',level:8},{name:'Kubernetes',level:7},{name:'AWS',level:8},
+                    {name:'Product',level:7},{name:'Leadership',level:8}
+                ];
+                const lines = ['<span class="term-highlight">Skill proficiency:</span>',''];
+                skills.forEach(s => {
+                    const bar = '<span style="color:#ff6a00">' + '█'.repeat(s.level) + '</span>' + '<span class="term-out">' + '░'.repeat(10-s.level) + '</span>';
+                    lines.push('  ' + s.name.padEnd(14) + bar + ' ' + s.level + '/10');
+                });
+                return lines;
+            },
+            journey: () => [
+                '<span class="term-highlight">Career trajectory:</span>',
+                '',
+                '  <span class="term-success">2015</span>  IIT Bombay CS → Housing.com & Lumiata (Mumbai)',
+                '  <span class="term-success">2017</span>  BlueFire AI — NLP on financial data (Mumbai)',
+                '  <span class="term-success">2018</span>  ✈ Moved to Copenhagen → Tradeshift',
+                '  <span class="term-success">2021</span>  Went all-in on Web3 as builder + user',
+                '  <span class="term-success">2022</span>  ✈ Biconomy — on-chain data infra (Dubai)',
+                '  <span class="term-success">2023</span>  🚀 Co-founded Barter — CTO (Bengaluru)',
+                '  <span class="term-success">NOW</span>   Shipping DGBet + DGPredict, exploring AI x Web3',
+            ],
+            travel: () => [
+                '<span class="term-highlight">25+ countries and counting:</span>',
+                '',
+                '  🇮🇳 India (home) → 🇩🇰 Denmark (3 yrs) → 🇦🇪 UAE (1.5 yrs) → 🇮🇳 Back to India',
+                '',
+                '  Memorable stops: Japan, Thailand, Russia, Qatar, Portugal,',
+                '  Netherlands, Germany, Czech Republic, Hungary, Spain, Italy,',
+                '  Sweden, Norway, Finland, Estonia, Singapore, Indonesia...',
+                '',
+                '  <span class="term-accent">Not a tourist — I live like a local wherever I go.</span>',
+                '  Copenhagen shaped my product thinking. Dubai sharpened my hustle.',
+            ],
+            fifa: () => [
+                '<span class="term-highlight">FIFA World Cup — in the stands:</span>',
+                '',
+                '  ⚽ <span class="term-success">Russia 2018</span> — First World Cup live. The atmosphere in',
+                '     Moscow and St Petersburg was electric. Got hooked.',
+                '',
+                '  ⚽ <span class="term-success">Qatar 2022</span> — Watched the GOAT debate end in real-time.',
+                '     Was in Lusail Stadium for the final. Argentina vs France.',
+                '     120 minutes of chaos. Penalties. Then Messi lifted it.',
+                '',
+                '  <span class="term-accent">That moment is burned into my memory forever.</span>',
+                '  Prediction markets couldn\'t have priced that drama.',
+            ],
+            web3: () => [
+                '<span class="term-highlight">My Web3 thesis:</span>',
+                '',
+                '  Most crypto builders don\'t use their own products.',
+                '  I\'ve put my own money in DeFi, NFTs, and prediction markets.',
+                '  That changes how you build. You feel the UX pain.',
+                '',
+                '  <span class="term-accent">Prediction markets are crypto\'s killer app.</span>',
+                '  They combine skin-in-the-game with crowd wisdom.',
+                '  Real utility. Real users. Real edge over TradFi.',
+            ],
+            unpopular: () => {
+                const takes = [
+                    'Most "decentralized" apps are just databases with extra steps.',
+                    'The best CTO skill isn\'t coding — it\'s knowing when NOT to build.',
+                    'Prediction markets will replace polls within 10 years.',
+                    'Data engineering is harder than ML. Fight me.',
+                    'NFTs will come back, but as utility tokens, not JPEGs.',
+                    'Web3 doesn\'t need more infra. It needs more users.',
+                    'Copenhagen has better street food than most Asian cities. (I said it.)',
+                ];
+                const take = takes[Math.floor(Math.random() * takes.length)];
+                return [
+                    '<span class="term-highlight">🔥 Hot take:</span>',
+                    '',
+                    '  <span class="term-accent">"' + take + '"</span>',
+                    '',
+                    '  <span class="term-out">(Run again for another one)</span>',
+                ];
+            },
+            stack: () => [
+                '<span class="term-highlight">Current stack at Barter:</span>',
+                '',
+                '  Frontend:  React, Next.js, TypeScript, TailwindCSS',
+                '  Backend:   Node.js, Golang, PostgreSQL, Redis',
+                '  Blockchain: Solidity, Ethers.js, Hardhat, EVM chains',
+                '  Infra:     AWS, Docker, Kubernetes, GitHub Actions',
+                '  Data:      Clickhouse, Kafka, Custom indexers',
+                '  Product:   Figma, Linear, Notion',
+            ],
+            music: () => [
+                '<span class="term-highlight">🎧 The Audiophile Setup:</span>',
+                '',
+                '  12 speakers in my work room. Every room in the house has 4+.',
+                '  Traktor DJ controller for mixing. Ableton Push for production.',
+                '  Genre: melodic techno, progressive house.',
+                '',
+                '  <span class="term-accent">Tomorrowland</span> — been there. Multiple electronic music',
+                '  concerts across the globe. Music isn\'t a hobby,',
+                '  it\'s how I think. Best code gets written to a good set.',
+            ],
+            films: () => [
+                '<span class="term-highlight">🎬 Filmmaking:</span>',
+                '',
+                '  Made short films at IIT Bombay. Camera nerd since uni.',
+                '  Big on editing workflows — always exploring the latest',
+                '  tools and tech for post-production.',
+                '',
+                '  <span class="term-accent">The storytelling muscle carries over to product.</span>',
+                '  How you frame a feature demo is filmmaking too.',
+            ],
+            trading: () => [
+                '<span class="term-highlight">📈 Trading:</span>',
+                '',
+                '  Manual trading: crypto, prediction markets, some equities.',
+                '  Built automated trading bots — custom strategies that run 24/7.',
+                '  Combined technical analysis with on-chain signals.',
+                '',
+                '  <span class="term-accent">Skin in the game changes how you build prediction markets.</span>',
+                '  You feel every bug. Every latency spike. Every bad UX.',
+            ],
+            ai: () => [
+                '<span class="term-highlight">🤖 Current AI exploration:</span>',
+                '',
+                '  Deep-diving into LLMs — not just using them, building with them.',
+                '  Exploring how AI can power the next wave of consumer apps.',
+                '  Using cutting-edge models for trading insights, content,',
+                '  and product development workflows.',
+                '',
+                '  <span class="term-accent">The intersection of AI x Web3 x Prediction Markets</span>',
+                '  <span class="term-accent">is where the next big thing gets built.</span>',
+            ],
+            contact: () => [
+                '<span class="term-highlight">Let\'s connect:</span>',
+                '',
+                '  📧  charan@barter.tech',
+                '  🐦  <a href="https://x.com/0xCryptoNomads" target="_blank" style="color:var(--cyan)">x.com/0xCryptoNomads</a>',
+                '  💼  <a href="https://linkedin.com/in/charankattumenu" target="_blank" style="color:var(--cyan)">linkedin.com/in/charankattumenu</a>',
+                '  🐙  <a href="https://github.com/inwardthinker" target="_blank" style="color:var(--cyan)">github.com/inwardthinker</a>',
+                '',
+                '  DMs are open. I reply.',
+            ],
+            surprise: () => {
+                // Trigger matrix rain
+                startMatrixRain();
+                return [
+                    '<span class="term-success">🎉 INITIATING MATRIX MODE...</span>',
+                    '',
+                    '  <span class="term-accent">If you can read this, you\'re a real one.</span>',
+                    '  Here\'s a secret: the first person to DM me',
+                    '  "I found the terminal" gets a free prediction',
+                    '  market alpha call.',
+                    '',
+                    '  <span class="term-out">(Matrix rain will stop in 8 seconds)</span>',
+                ];
+            },
+            clear: () => { termBody.innerHTML=''; return []; },
+        };
+
+        function addOutput(lines) {
+            lines.forEach(line => {
+                const div = document.createElement('div');
+                div.className = 'term-line';
+                div.innerHTML = '<span class="term-out">' + line + '</span>';
+                termBody.appendChild(div);
+            });
+            const spacer = document.createElement('div');
+            spacer.className = 'term-line';
+            spacer.innerHTML = '&nbsp;';
+            termBody.appendChild(spacer);
+            termBody.scrollTop = termBody.scrollHeight;
+        }
+
+        function processCommand(input) {
+            const cmd = input.trim().toLowerCase();
+            // Echo the command
+            const echo = document.createElement('div');
+            echo.className = 'term-line';
+            echo.innerHTML = '<span class="term-prompt">charan@web3 ~ % </span><span class="term-cmd">' + input + '</span>';
+            termBody.appendChild(echo);
+
+            if (cmd === '') { termBody.scrollTop = termBody.scrollHeight; return; }
+            if (commands[cmd]) {
+                const output = commands[cmd]();
+                if (output.length > 0) addOutput(output);
+            } else {
+                addOutput([
+                    '<span class="term-highlight">Command not found: ' + cmd + '</span>',
+                    'Type <span class="term-highlight">help</span> for available commands.'
+                ]);
+            }
+        }
+
+        termInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                processCommand(termInput.value);
+                termInput.value = '';
+            }
+        });
+
+        // Click terminal body to focus input
+        document.querySelector('.terminal').addEventListener('click', () => termInput.focus());
+
+        // ===== MATRIX RAIN EASTER EGG =====
+        function startMatrixRain() {
+            const canvas = document.createElement('canvas');
+            canvas.id = 'matrixCanvas';
+            canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;pointer-events:none;opacity:0.7;';
+            document.body.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const chars = 'CHARANWEB3PREDICTIONBTCETHSOLDEFI01';
+            const fontSize = 14;
+            const columns = Math.floor(canvas.width / fontSize);
+            const drops = Array(columns).fill(1);
+
+            function draw() {
+                ctx.fillStyle = 'rgba(8,8,8,0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#ff6a00';
+                ctx.font = fontSize + 'px JetBrains Mono, monospace';
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillStyle = Math.random() > 0.5 ? '#ff6a00' : '#ff9a40';
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+            }
+
+            const interval = setInterval(draw, 50);
+            setTimeout(() => {
+                clearInterval(interval);
+                canvas.remove();
+            }, 8000);
+        }
+    </script>
+</body>
+</html>
